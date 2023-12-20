@@ -1,0 +1,10 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: NRedis8N
+# Runs Redis script
+# ==============================================================================
+
+bashio::log.info "Starting Redis..."
+
+redis-stack-server
