@@ -19,6 +19,7 @@ bashio::var.json \
   certfile "$(bashio::config 'certfile')" \
   keyfile "$(bashio::config 'keyfile')" \
   db_password "$(bashio::config 'db_password')" \
+  log_level "$(bashio::config 'log_level')" \
   | tempio \
       -template /etc/redis/config.gtpl \
       -out /config/config.conf
