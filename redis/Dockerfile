@@ -5,14 +5,18 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.2.0
 FROM ${BUILD_FROM}
 ARG BUILD_ARCH
 
-ARG RUSTDESK_VERSION=1.1.9
+ARG REDIS_VERSION=7.2.3
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends redis-server \
+    && apt-get install -y --no-install-recommends lsb-release curl gpg \
+    && curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
+    && apt-get update \
+    && apt-get -y --no-install-recommends install redis=6:${REDIS_VERSION}-1rl1~bookworm1 \
     && rm -fr  \
         /tmp/* \
         /var/{cache,log}/* \
