@@ -25,7 +25,7 @@ RUN apt-get update \
 # Copy root filesystem
 COPY rootfs /
 
-EXPOSE 6379 8001
+EXPOSE 6379
 
 # Build arguments
 ARG BUILD_DATE

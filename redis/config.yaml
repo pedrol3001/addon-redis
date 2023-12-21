@@ -11,7 +11,18 @@ arch:
   - amd64
 ports:
   6379/tcp: 6379
-  8001/tcp: 8001
 ports_description:
   6379/tcp: Redis port
-  8001/udp: RedisInsight port
+map:
+  - addon_config:rw
+  - ssl
+options:
+  ssl: false
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+schema:
+  ssl: bool
+  certfile: str
+  keyfile: str
+  db_password: str?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?

@@ -6,3 +6,23 @@
 # ==============================================================================
 
 bashio::log.info "Configuring Redis..."
+
+port="$(bashio::addon.port 6379)"
+if ! bashio::var.has_value "${port}"; then
+  port=6379
+fi
+
+
+bashio::var.json \
+  port "^$port" \
+  ssl "^$(bashio::config 'ssl')" \
+  certfile "$(bashio::config 'certfile')" \
+  keyfile "$(bashio::config 'keyfile')" \
+  db_password "$(bashio::config 'db_password')" \
+  | tempio \
+      -template /etc/redis/config.gtpl \
+      -out /config/config.json
+
+if [ "$(bashio::config 'log_level')" == "debug" ]; then
+  bashio::log.info "$(cat /config/config.json)"
+fi
