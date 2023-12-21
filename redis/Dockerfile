@@ -12,12 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends lsb-release curl gpg \
-    && curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
-    && chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
-    && apt-get update \
-    && apt-get -y --no-install-recommends install redis-stack-server \
+    && apt-get -y install --no-install-recommends redis-server \
     && rm -fr  \
         /tmp/* \
         /var/{cache,log}/* \
