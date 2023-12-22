@@ -7,4 +7,4 @@
 
 bashio::log.info "Starting Redis..."
 
-redis-server /config/config.conf
+redis-server /data/redis.conf
