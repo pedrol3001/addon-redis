@@ -14,7 +14,6 @@ ports:
 ports_description:
   6379/tcp: Redis port
 map:
-  - addon_config:rw
   - ssl
 options:
   ssl: false
