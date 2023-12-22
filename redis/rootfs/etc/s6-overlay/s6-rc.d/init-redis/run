@@ -21,9 +21,9 @@ bashio::var.json \
   db_password "$(bashio::config 'db_password')" \
   log_level "$(bashio::config 'log_level')" \
   | tempio \
-      -template /etc/redis/config.gtpl \
-      -out /data/config.conf
+      -template /etc/redis/redis.gtpl \
+      -out /data/redis.conf
 
 if [ "$(bashio::config 'log_level')" == "debug" ]; then
-  bashio::log.info "$(cat /data/config.conf)"
+  bashio::log.info "$(cat /data/redis.conf)"
 fi
